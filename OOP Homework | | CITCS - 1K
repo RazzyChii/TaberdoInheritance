@@ -1,0 +1,175 @@
+Package.java
+/* OOP Homework by Razaele Taberdo || CITCS 1K */
+package Package;
+public class Package{
+
+	protected int weight;
+	protected char shippingMethod;
+	protected double shippingCost;
+	protected boolean insured;
+        
+	public Package (int w, char sm){
+            weight = w;
+            this.shippingMethod = sm;
+            shippingCost = calCost();
+        }
+        
+        public double calCost (){
+            
+            if (weight >= 1 && weight <= 8){
+                
+                switch(shippingMethod){
+                    case 'A':
+                        return 2.00;
+                    case 'T':
+                        return 1.50;
+                    case 'M':
+                        return 0.50;
+                    default:
+                        return 0;
+                }
+            }else if (weight >= 9 && weight <= 16){
+                
+                switch(shippingMethod){
+                    case 'A':
+                        return 3.00;
+                    case 'T':
+                        return 2.35;
+                    case 'M':
+                        return 1.50;
+                    default:
+                        return 0;
+                }
+            }else if (weight >= 17){
+                switch(shippingMethod){
+                    case 'A':
+                        return 4.50;
+                    case 'T':
+                        return 3.25;
+                    case 'M':
+                        return 2.15;
+                    default:
+                        return 0;
+                }
+            }
+            return 0;
+        }
+        
+        public void display(){
+            
+            System.out.println("Package Description: \n" + "Weight: " + weight + " oz");
+            
+            System.out.println("Pick a Shipping Method: ");
+            switch(shippingMethod){
+                case 'A':
+                    System.out.println("Air");
+                    break;
+                case 'T':
+                    System.out.println("Truck");
+                    break;
+                case 'M':
+                    System.out.println("Mail");
+                    break;
+                default:
+                    System.out.println("Undefined");
+                break;
+            }
+            
+            System.out.println("\n Shipping Cost: $" + shippingCost + "\n" + "Insured: ");
+        if(insured){
+            System.out.println("Yes \n");        
+        }else {
+            System.out.println("No \n");
+        }
+        }
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------
+InsuredPackage.java
+/* OOP Homework by Razaele Taberdo || CITCS 1K */
+package Package;
+public class InsuredPackage extends Package{
+    
+	public InsuredPackage (int weight, char shippingMethod){
+            super(weight, shippingMethod);
+            
+	if (shippingCost >= 0 && shippingCost <= 1.00){
+            shippingCost += 2.45;
+        }else if(shippingCost >= 1.01 && shippingCost <= 3.00){
+            shippingCost += 3.95;
+        }else if (shippingCost >= 3.01){
+            shippingCost += 5.55;
+        }
+        insured = true;
+        }
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------
+UsePackage.java
+/* OOP Homework by Razaele Taberdo || CITCS 1K */
+package Package;
+public class UsePackage{
+	public static void main(String aww []){
+		Package x1 = new Package (6, 'M');
+                InsuredPackage x2 = new InsuredPackage (58, 'T');
+                Package x3 = new Package (37, 'T');
+                InsuredPackage x4 = new InsuredPackage (32, 'A');
+                Package x5 = new Package (9, 'M');
+                
+                Package Packages [] = {x1, x2, x3, x4, x5};
+                
+                for (int x = 0; x < Packages.length; x++){
+                    Packages[x].display();
+                }
+        }
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Output:
+run:
+Package Description: 
+Weight: 6 oz
+Pick a Shipping Method: 
+Mail
+
+ Shipping Cost: $0.5
+Insured: 
+No 
+
+Package Description: 
+Weight: 58 oz
+Pick a Shipping Method: 
+Truck
+
+ Shipping Cost: $8.8
+Insured: 
+Yes 
+
+Package Description: 
+Weight: 37 oz
+Pick a Shipping Method: 
+Truck
+
+ Shipping Cost: $3.25
+Insured: 
+No 
+
+Package Description: 
+Weight: 32 oz
+Pick a Shipping Method: 
+Air
+
+ Shipping Cost: $10.05
+Insured: 
+Yes 
+
+Package Description: 
+Weight: 9 oz
+Pick a Shipping Method: 
+Mail
+
+ Shipping Cost: $1.5
+Insured: 
+No 
+
+BUILD SUCCESSFUL (total time: 0 seconds)
